@@ -7,25 +7,25 @@ public class AdvancedEnemySpawner : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] private AdvancedEnemyMovement _enemyTemplate;
 
-    private GameObject[] _spawnPoints;
+    private WaitForSeconds _WaitTimeToSpawn;
 
     private void Start()
     {
-        _spawnPoints = new GameObject[transform.childCount];
-
-        for (int i = 0; i < _spawnPoints.Length; i++)
-        {
-            _spawnPoints[i] = transform.GetChild(i).gameObject;
-        }
+        _WaitTimeToSpawn = new WaitForSeconds(_spawnDelay);
 
         StartCoroutine(SpawnEnemies());
+    }
+
+    private void OnDestroy()
+    {
+        StopCoroutine(SpawnEnemies());
     }
 
     private IEnumerator SpawnEnemies()
     {
         while (true)
         {
-            yield return new WaitForSeconds(_spawnDelay);
+            yield return _WaitTimeToSpawn;
 
             var enemy = Instantiate(_enemyTemplate, transform.position, Quaternion.identity);
             enemy.SetTarget(_target);

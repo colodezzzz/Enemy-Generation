@@ -6,11 +6,6 @@ public class AdvancedEnemyMovement : MonoBehaviour
 
     private Transform _target;
 
-    public void SetTarget(Transform target)
-    {
-        _target = target;
-    }
-
     private void Start()
     {
         Vector3 direction = _target.position - transform.position;
@@ -25,5 +20,10 @@ public class AdvancedEnemyMovement : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetTarget(Transform target)
+    {
+        _target = target;
     }
 }
