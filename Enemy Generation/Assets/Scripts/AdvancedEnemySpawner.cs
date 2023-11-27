@@ -28,7 +28,7 @@ public class AdvancedEnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(_spawnDelay);
 
             var enemy = Instantiate(_enemyTemplate, transform.position, Quaternion.identity);
-            enemy.Target = _target;
+            enemy.SetTarget(_target);
         }
     }
 }
